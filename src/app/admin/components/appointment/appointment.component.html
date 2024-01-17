@@ -1,0 +1,81 @@
+<!-- start page title -->
+<div class="row">
+  <div class="col-12">
+      <div class="page-title-box d-flex align-items-center justify-content-between">
+          <h4 class="mb-0">Appointments Page</h4>
+          <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="javascript: void(0);">Utility</a></li>
+                  <li class="breadcrumb-item active">Appointments Page</li>
+              </ol>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-body">
+                      <button class="btn btn-icon btn-success waves-effect waves-light mb-2 me-2"
+                              data-bs-toggle="modal"
+                              (click)="showAddModal()"
+                              data-bs-target=".create-modal"
+                      >
+                        <span>Create New Appointment</span>
+                      </button>
+
+                      <button class="btn btn-icon btn-primary waves-effect waves-light mb-2 me-2"
+                              (click)="getAllDeleted()"
+                      >
+                        <span>View Deleted Appointments</span>
+                      </button>
+
+                      <button class="btn btn-icon btn-dark waves-effect waves-light mb-2"
+                              (click)="getAllNotDeleted()"
+                      >
+                        <span>View Undeleted Appointments</span>
+                      </button>
+
+                      <div class="container  " >
+                        <div class="row "  >
+                          <div class="card text-center " *ngFor="let appointment of appointments">
+                            <div class="card-header" >
+                              <ul class="nav nav-tabs card-header-tabs">
+                                <div class="btn-group btn-group-lg" role="group">
+                                  <button class="btn btn-icon btn-outline-danger waves-effect waves-light me-2" (click)="deleteServiceById(appointment.id)">
+                                    <span>Delete</span>
+                                  </button>
+                                  <button class="btn btn-icon btn-outline-danger waves-effect waves-light me-2" (click)="hardDeleteById(appointment.id)">
+                                    <span>Hard Delete</span>
+                                  </button>
+                                  <button class="btn btn-icon btn-outline-success waves-effect waves-light" (click)="restoreById(appointment.id)">
+                                    <span>Restore</span>
+                                  </button>
+                                </div>
+
+                              </ul>
+                            </div>
+                            <div class="card-body d-flex justify-content-between ">
+                              <h5 class="card-title"><b>Name:</b> {{appointment.fullName}} /</h5>
+                              <p class="card-text"><b>User Id:</b> {{appointment.userId}} /</p>
+                              <p class="card-text"><b>Phone Number:</b> {{appointment.phoneNumber}} /</p>
+                              <p class="card-text"><b>Email:</b> {{appointment.email}} /</p>
+                              <p class="card-text"><b>Start Date:</b> {{appointment.startDate}} /</p>
+                              <p class="card-text"><b>End Date:</b> {{appointment.endDate}} /</p>
+                              <button class="btn btn-icon btn-warning waves-effect waves-light me-2"
+                              data-bs-toggle="modal" (click)="showEditModal(appointment)" data-bs-target=".edit-modal"
+                              >
+                                EDIT
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- end page title -->
+
+<app-appointment-add (onLoad)="getAll()"></app-appointment-add>
+<app-appointment-update (onLoad)="getAll()"></app-appointment-update>
